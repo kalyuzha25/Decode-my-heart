@@ -1,0 +1,456 @@
+:root {
+    --width: 35px;
+    --height: calc(var(--width) / 1.5);
+    --primary: #333;
+    --secondary: pink;
+    --lock-top-width: calc(var(--width) / 3.5);
+    --lock-top-border: calc(var(--height) / 3.5);
+    --half-width: calc(var(--width) / 2);
+    --origin: calc(var(--height) / 7);
+    --final: calc(var(--height) / 5);
+  }
+  /* --- TEXT FOR TASK --- */
+  .challangeText {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333; /* класичний темний текст */
+    margin: 8px 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+/* --- INPUT FIELDS --- */
+input[type="text"] {
+    width: 200px;
+    max-width: 280px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 2px solid #ff69b4; /* рожевий контур */
+    box-shadow: 0 3px 10px rgba(255,105,180,0.2);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #ff1493; /* яскравий рожевий при фокусі */
+    box-shadow: 0 4px 15px rgba(255,20,147,0.3);
+}
+.challengeTitle {
+    font-family: 'Roboto Slab', serif; /* строгий, трохи монументальний шрифт */
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: #111; /* темний чорний */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* легке об’ємне світіння */
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.challengeTitle:hover {
+    transform: scale(1.03); /* легке збільшення при наведенні */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4); /* підкреслення об’єму */
+}
+  /* --- BODY & SCROLL --- */
+  body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffc0cb, #ffb6c1);
+    overflow-y: auto; /* дозволяємо вертикальний скрол */
+    position: relative;
+  }
+  
+  /* --- CELEBRATION TEXT --- */
+  .celebration-text {
+    position: fixed;
+    top: 20px;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(255,255,255,0.7);
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  /* --- HEARTS --- */
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #FF1493;
+    transform: rotate(-45deg);
+    animation: float 6s linear infinite;
+    z-index: 1;
+  }
+  
+  .heart::before,
+  .heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #FF1493;
+    border-radius: 50%;
+  }
+  .heart::before { top: -10px; left: 0; }
+  .heart::after { top: 0; left: 10px; }
+  
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(-45deg); opacity: 0; }
+  }
+  
+  /* --- CONTAINER --- */
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center; /* центр по ширині */
+    max-width: 400px;
+    margin: 120px auto 60px; /* верхній і нижній відступ */
+    z-index: 5; /* поверх сердечок */
+    padding-bottom: 40px;
+  }
+  
+  /* --- CHALLENGE BOX --- */
+  .challenge {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid var(--secondary);
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .challenge:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  
+  /* --- LOCK --- */
+  .lock-container {
+    position: relative;
+    width: var(--width);
+    margin: 10px auto 20px;
+    background: var(--secondary);
+    padding: calc(var(--width) * 0.166) calc(var(--width) * 0.433) calc(var(--width) * 0.366);
+    border-radius: calc(var(--width) * 3);
+    cursor: pointer;
+    perspective: 400px;
+  }
+  
+  .lock-top {
+    border-top: var(--lock-top-border) solid var(--primary);
+    border-left: var(--lock-top-border) solid var(--primary);
+    border-right: var(--lock-top-border) solid var(--primary);
+    border-radius: var(--half-width) var(--half-width) 0 0;
+    width: var(--lock-top-width);
+    height: calc(var(--height)/1.5);
+    margin-left: calc(var(--half-width) - var(--lock-top-border) - (var(--lock-top-width)/2) + (var(--height)/75));
+    transform-origin: calc(var(--lock-top-border)/2) 0;
+    transform: translate(0, var(--origin));
+    position: relative;
+    transition: transform 0.5s cubic-bezier(.8,0,0,1);
+  }
+  
+  .lock-top::before {
+    content: '';
+    width: var(--lock-top-border);
+    height: var(--final);
+    background: var(--secondary);
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+  }
+  
+  .lock-top::after {
+    content: '';
+    width: var(--lock-top-border);
+    height: var(--final);
+    background: var(--primary);
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    border-bottom-left-radius: calc(var(--width)/15);
+    border-bottom-right-radius: calc(var(--width)/15);
+  }
+  
+  .lock-body {
+    width: var(--width);
+    height: var(--height);
+    background: var(--primary);
+    border-radius: calc(var(--width)/8);
+    position: relative;
+    border: calc(var(--height)/75) solid var(--secondary);
+  }
+  
+  .keyhole {
+    position: absolute;
+    width: calc(var(--width)/7.5);
+    height: calc(var(--height)/2.5);
+    background-color: var(--secondary);
+    border-radius: calc(var(--height)/2.5);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* --- LOCK ANIMATION --- */
+  .lock-container.open .lock-top {
+    animation: open 0.5s cubic-bezier(.8,0,0,1) forwards;
+  }
+  .lock-container.close .lock-top {
+    animation: close 0.5s cubic-bezier(.8,0,0,1) forwards;
+  }
+  
+  @keyframes open {
+    0% { transform: translate(0, var(--final)); }
+    50% { transform: translate(0, var(--origin)); }
+    100% { transform: translate(0, var(--origin)) rotateY(180deg); }
+  }
+  
+  @keyframes close {
+    0% { transform: translate(0, var(--origin)) rotateY(180deg); }
+    50% { transform: translate(0, var(--origin)); }
+    100% { transform: translate(0, var(--final)); }
+  }
+  
+  /* --- CHAT --- */
+/* --- CHATBOT CONTAINER --- */
+#chatbot-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border: 1px solid #ff69b4;
+    transition: all 0.3s ease;
+}
+
+/* --- CHAT LOG --- */
+/* --- CHAT CONTAINER --- */
+#chatbot-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* --- CHAT LOG --- */
+  .chat-log {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    height: 200px;
+    overflow-y: auto;
+    background: #fdf2f7; /* легкий рожевий фон */
+    border-radius: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,105,180,0.5) transparent;
+  }
+  
+  /* Webkit scrollbar */
+  .chat-log::-webkit-scrollbar {
+    width: 6px;
+  }
+  .chat-log::-webkit-scrollbar-thumb {
+    background: rgba(255,105,180,0.5);
+    border-radius: 3px;
+  }
+  .chat-log::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* --- MESSAGES --- */
+  .chat-log p {
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 18px;
+    max-width: 75%;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: all 0.3s;
+  }
+  
+  /* Bot messages */
+  .chat-log p.bot {
+    background: #ff69b4; /* яскравий рожевий */
+    color: #fff;
+    align-self: flex-start;
+    border-top-left-radius: 4px;
+    box-shadow: 0 3px 8px rgba(255,20,147,0.3);
+  }
+  
+  /* User messages */
+  .chat-log p.user {
+    background: #333; /* темний контраст */
+    color: #fff;
+    align-self: flex-end;
+    border-top-right-radius: 4px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  }
+  
+  /* --- CHAT FORM --- */
+  #chat-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  
+  /* Input field */
+  #chat-input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #ff69b4;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  #chat-input:focus {
+    border-color: #ff1493;
+    box-shadow: 0 2px 12px rgba(255,20,147,0.3);
+    transform: scale(1.02);
+  }
+  
+  /* Submit button */
+  #chat-form button {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.4), 0 0 8px #ff1493 inset;
+  }
+  #chat-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255,105,180,0.6), 0 0 12px #ff1493 inset;
+  }
+  #chat-form button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(255,105,180,0.3), 0 0 6px #ff1493 inset;
+  }
+  /* BUTTONS UNLOCK STYLE */
+  button {
+    background: linear-gradient(145deg, #ff69b4, #ff1493);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4), 0 0 10px #ff1493 inset;
+  }
+  button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+  }
+  button:hover::before {
+    top: 0;
+    left: 0;
+  }
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6), 0 0 15px #ff1493 inset;
+  }
+  button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3), 0 0 5px #ff1493 inset;
+  }
+
+  /* --- PASSWORD INPUT --- */
+#password-container input {
+    width: calc(100% - 20px);
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 2px solid #ff69b4;
+    background: linear-gradient(145deg, #ffe6f0, #ffc0cb);
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  #password-container input:focus {
+    outline: none;
+    border-color: #ff1493;
+    box-shadow: 0 4px 20px rgba(255, 20, 147, 0.5);
+    transform: scale(1.02);
+  }
+  
+  /* --- PASSWORD BUTTON --- */
+  #password-container button {
+    width: 100%;
+    padding: 12px 0;
+    margin-top: 8px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4), 0 0 10px #ff1493 inset;
+    transition: all 0.3s ease;
+  }
+  
+  #password-container button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+  }
+  
+  #password-container button:hover::before {
+    top: 0;
+    left: 0;
+  }
+  
+  #password-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6), 0 0 15px #ff1493 inset;
+  }
+  
+  #password-container button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3), 0 0 5px #ff1493 inset;
+  }

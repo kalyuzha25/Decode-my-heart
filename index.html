@@ -1,11 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DecodeMy♡</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DecodeMy♡</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    
+
+<!-- Фонові серця -->
+<div class="heart" style="left:5%; animation-delay:0s;"></div>
+<div class="heart" style="left:15%; animation-delay:1s;"></div>
+<div class="heart" style="left:25%; animation-delay:2s;"></div>
+<div class="heart" style="left:35%; animation-delay:1.5s;"></div>
+<div class="heart" style="left:45%; animation-delay:0.5s;"></div>
+<div class="heart" style="left:55%; animation-delay:2.2s;"></div>
+<div class="heart" style="left:65%; animation-delay:0.8s;"></div>
+<div class="heart" style="left:75%; animation-delay:1.3s;"></div>
+<div class="heart" style="left:85%; animation-delay:2.5s;"></div>
+<div class="heart" style="left:95%; animation-delay:1.8s;"></div>
+  <div class="container">
+    <!-- MEMORY CHALLENGE -->
+    <div class="challenge" id="memory-challenge">
+        <p class="challengeTitle">Memory Challenge:</p>
+      <div id="lock-memory" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Task 1: Enter the coordinates of our first meeting:</p>
+      <input type="text" id="memory-input" placeholder="e.g., 40.7128, 74.0060" />
+      <button id="memory-submit">Unlock</button>
+    </div>
+
+    <!-- MUSIC CHALLENGE -->
+    <div class="challenge" id="music-challenge" style="display:none;">
+        <p class="challengeTitle">Music Challenge:</p>
+      <div id="lock-music" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Task 2: Listen to the melody and enter the password:</p>
+      <input type="text" id="music-input" placeholder="e.g., 12345" />
+      <button id="music-submit">Unlock</button>
+    </div>
+
+    <!-- AI CHALLENGE -->
+    <div class="challenge" id="ai-challenge" style="display:none;">
+        <p class="challengeTitle">AI Challenge:</p>
+      <div id="lock-ai" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Answer the questions to unlock the secret password:</p>
+
+      <div id="chatbot-container">
+        <div id="chat-log" class="chat-log">
+          <p><em>Chatbot is ready. Let's start!</em></p>
+        </div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type your answer..." required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+
+      <div id="password-container" style="display:none; margin-top:10px;">
+        <p>Enter the secret password to unlock the next task:</p>
+        <input type="text" id="password-input" placeholder="Enter password" />
+        <button id="password-submit">Unlock</button>
+      </div>
+
+      <div id="next-task" style="display:none; margin-top:10px;">
+        <p><strong>Next Task Unlocked!</strong> 🎉</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
