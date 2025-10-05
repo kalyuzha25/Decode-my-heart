@@ -84,7 +84,7 @@ chatForm.addEventListener('submit', e=>{
 passwordSubmit.addEventListener('click', ()=>{
     if(passwordInput.value.trim()===secretPassword){
         passwordContainer.style.display='none';
-        mapChallenge.style.display='block';
+        document.getElementById('flower-challenge').style.display='block';
         // Відкрити замок Task 3
         const lockAI = document.getElementById('lock-ai');
         lockAI.classList.replace('close','open');
@@ -96,37 +96,22 @@ passwordSubmit.addEventListener('click', ()=>{
 askQuestion();
 
 // ---------------- TASK 4 ----------------
-(function(){
-    const coords = [
-        {lat: 50.47211, lon: 4.19566, label: "Location 1"},
-        {lat: 50.47199, lon: 4.19369, label: "Location 2"},
-        {lat: 50.47185, lon: 4.19424, label: "Location 3"}
-    ];
-    const passwords=["rotor21","motor7","orbit9"];
-    const mapDiv=document.getElementById('map');
-    const gotoButtons=document.querySelectorAll('.goto');
-    const inputs=document.querySelectorAll('.pw-input');
-    const completeBtn=document.getElementById('task4-complete');
+const flowers = document.querySelectorAll('.flower');
+const flowerPassword = document.getElementById('flower-password');
+const messageDiv = document.createElement('div');
+messageDiv.className = 'message';
+document.querySelector('#flower-challenge').appendChild(messageDiv);
 
-    const map=L.map(mapDiv).setView([coords[0].lat, coords[0].lon],15);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
-    const markers=coords.map(c=>L.marker([c.lat,c.lon]).addTo(map).bindPopup(c.label));
-
-    gotoButtons.forEach((btn,i)=>{
-        btn.addEventListener('click',()=>{
-            map.flyTo([coords[i].lat,coords[i].lon],17,{duration:1});
-            markers[i].openPopup();
-        });
-    });
-
-    function checkAll(){
-        let allCorrect=true;
-        inputs.forEach((inp,i)=>{if(inp.value.trim()!==passwords[i]) allCorrect=false;});
-        completeBtn.disabled=!allCorrect;
+flowers.forEach(flower => {
+  flower.addEventListener('click', () => {
+    if (flower.dataset.correct === "true") {
+      flower.classList.add('correct');
+      flowerPassword.style.display = "block";
+      messageDiv.textContent = "🎉 You found the right flower!";
+    } else {
+      flower.classList.add('incorrect');
+      messageDiv.textContent = "Oops! Try another one 😏";
+      setTimeout(() => flower.classList.remove('incorrect'), 300);
     }
-    inputs.forEach(inp=>inp.addEventListener('input',checkAll));
-    completeBtn.addEventListener('click', ()=>{
-        alert("🎉 Task 4 complete! You have finished all challenges!");
-        mapChallenge.style.display='none';
-    });
-})();
+  });
+});

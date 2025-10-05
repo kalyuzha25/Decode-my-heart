@@ -465,48 +465,52 @@ input[type="text"]:focus {
     box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3), 0 0 5px #ff1493 inset;
   }
 
-
-
-  .map-controls button {
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding: 6px 10px;
-    border-radius: 5px;
-    border: 1px solid #66ff66;
-    background-color: #1f2833;
-    color: #66ff66;
-    cursor: pointer;
-  }
-  .map-controls button:hover {
-    background-color: #66ff66;
-    color: #0b0c10;
-  }
-  
-  /* Інпути Task 4 */
-.pw-input {
-    width: 80%;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 8px;
-    border: 1px solid #ff69b4; /* замість чорного/зеленого */
-    background-color: #fff; /* світлий фон */
-    color: #333;
+/* --- КВІТКИ --- */
+.flower {
+  font-size: 50px;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s;
+  position: relative;
 }
 
-/* Кнопки "Go to Location" */
-.map-controls button {
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid #ff69b4; /* замість зеленої */
-    background: #ff69b4; /* яскравий рожевий */
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+.flower:hover {
+  transform: scale(1.2) rotate(10deg);
 }
-.map-controls button:hover {
-    background: linear-gradient(135deg, #ff69b4, #ff1493);
-    color: #fff;
+
+/* невеликий хаотичний рух */
+@keyframes float-random {
+  0% { transform: translate(0,0) rotate(0deg); }
+  25% { transform: translate(5px,-5px) rotate(5deg); }
+  50% { transform: translate(-5px,5px) rotate(-5deg); }
+  75% { transform: translate(3px,-3px) rotate(3deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+.flower {
+  animation: float-random 4s ease-in-out infinite;
+}
+
+/* правильна квітка вибухає */
+.flower.correct {
+  animation: explode 0.8s forwards;
+}
+
+@keyframes explode {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(2) rotate(180deg); opacity: 0.7; }
+  100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+/* неправильна квітка трясеться */
+.flower.incorrect {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
 }

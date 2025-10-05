@@ -71,25 +71,36 @@
     </div>
   </div>
 
-  <!-- TASK 4: FIELD MISSION -->
-  <div class="challenge" id="map-challenge" style="display:none;">
-    <p class="challengeTitle">Task 4 — Field Mission</p>
-    <p class="challangeText">Find passwords at three locations on the map:</p>
-    <div id="map" style="height:300px; border-radius:10px; margin-bottom:10px;"></div>
-    <div class="map-controls">
-      <button class="goto" data-index="0">Go to Location 1</button>
-      <button class="goto" data-index="1">Go to Location 2</button>
-      <button class="goto" data-index="2">Go to Location 3</button>
+  <!-- TASK 4 -->
+  <div class="challenge" id="flower-challenge" style="display:none;">
+    <p class="challengeTitle">Flower Challenge:</p>
+    <p class="challangeText">Find the secret flower 🌸</p>
+    <div class="flower-container">
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="true">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
+      <div class="flower" data-correct="false">🌸</div>
     </div>
-    <div class="coords-list" style="margin-top:10px;">
-      <input type="text" class="pw-input" placeholder="Password from Location 1" data-index="0">
-      <input type="text" class="pw-input" placeholder="Password from Location 2" data-index="1">
-      <input type="text" class="pw-input" placeholder="Password from Location 3" data-index="2">
+    <div id="flower-password" style="margin-top:15px; font-weight:bold; display:none;">
+      Your secret password is: <span>LOVEYOU</span>
     </div>
-    <button id="task4-complete" disabled style="margin-top:10px;">Continue</button>
+    <div id="flower-message" class="message"></div>
   </div>
-</div>
 
+</div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
