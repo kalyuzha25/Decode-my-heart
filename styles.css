@@ -332,6 +332,16 @@ input[type="text"]:focus {
     box-shadow: 0 2px 12px rgba(255,20,147,0.3);
     transform: scale(1.02);
   }
+  /* Відокремлюємо фінальне повідомлення */
+.chat-log p.final-bot {
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255,20,147,0.4);
+}
   
   /* Submit button */
   #chat-form button {
@@ -454,3 +464,49 @@ input[type="text"]:focus {
     transform: scale(0.95);
     box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3), 0 0 5px #ff1493 inset;
   }
+
+
+
+  .map-controls button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #66ff66;
+    background-color: #1f2833;
+    color: #66ff66;
+    cursor: pointer;
+  }
+  .map-controls button:hover {
+    background-color: #66ff66;
+    color: #0b0c10;
+  }
+  
+  /* Інпути Task 4 */
+.pw-input {
+    width: 80%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 1px solid #ff69b4; /* замість чорного/зеленого */
+    background-color: #fff; /* світлий фон */
+    color: #333;
+}
+
+/* Кнопки "Go to Location" */
+.map-controls button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ff69b4; /* замість зеленої */
+    background: #ff69b4; /* яскравий рожевий */
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.map-controls button:hover {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: #fff;
+}
