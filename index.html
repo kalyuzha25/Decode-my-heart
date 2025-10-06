@@ -4,103 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DecodeMy♡</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="styles.css" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<!-- Фонові серця -->
-<div class="heart" style="left:5%; animation-delay:0s;"></div>
-<div class="heart" style="left:15%; animation-delay:1s;"></div>
-<div class="heart" style="left:25%; animation-delay:2s;"></div>
-<div class="heart" style="left:35%; animation-delay:1.5s;"></div>
-<div class="heart" style="left:45%; animation-delay:0.5s;"></div>
-<div class="heart" style="left:55%; animation-delay:2.2s;"></div>
-<div class="heart" style="left:65%; animation-delay:0.8s;"></div>
-<div class="heart" style="left:75%; animation-delay:1.3s;"></div>
-<div class="heart" style="left:85%; animation-delay:2.5s;"></div>
-<div class="heart" style="left:95%; animation-delay:1.8s;"></div>
+  <!-- Фонові серця -->
+  <div class="heart" style="left:5%; animation-delay:0s;"></div>
+  <div class="heart" style="left:15%; animation-delay:1s;"></div>
+  <div class="heart" style="left:25%; animation-delay:2s;"></div>
+  <div class="heart" style="left:35%; animation-delay:1.5s;"></div>
+  <div class="heart" style="left:45%; animation-delay:0.5s;"></div>
+  <div class="heart" style="left:55%; animation-delay:2.2s;"></div>
+  <div class="heart" style="left:65%; animation-delay:0.8s;"></div>
+  <div class="heart" style="left:75%; animation-delay:1.3s;"></div>
+  <div class="heart" style="left:85%; animation-delay:2.5s;"></div>
+  <div class="heart" style="left:95%; animation-delay:1.8s;"></div>
 
-<div class="container">
-  <!-- MEMORY CHALLENGE -->
-  <div class="challenge" id="memory-challenge">
-    <p class="challengeTitle">Memory Challenge:</p>
-    <div id="lock-memory" class="lock-container close">
-      <div class="lock-top"></div>
-      <div class="lock-body"><div class="keyhole"></div></div>
+  <div class="container">
+    <!-- MEMORY CHALLENGE -->
+    <div class="challenge" id="memory-challenge">
+      <p class="challengeTitle">Memory Challenge:</p>
+      <div id="lock-memory" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Task 1: Enter the coordinates of our first meeting:</p>
+      <input type="text" id="memory-input" placeholder="e.g., 50.86, 4.358" />
+      <button id="memory-submit">Unlock</button>
     </div>
-    <p class="challangeText">Task 1: Enter the coordinates of our first meeting:</p>
-    <input type="text" id="memory-input" placeholder="e.g., 50.86, 4.358" />
-    <button id="memory-submit">Unlock</button>
+
+    <!-- MUSIC CHALLENGE -->
+    <div class="challenge" id="music-challenge" style="display:none;">
+      <p class="challengeTitle">Music Challenge:</p>
+      <div id="lock-music" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Task 2: Listen to the melody and enter the password:</p>
+      <input type="text" id="music-input" placeholder="e.g., 12345" />
+      <button id="music-submit">Unlock</button>
+    </div>
+
+    <!-- AI CHALLENGE -->
+    <div class="challenge" id="ai-challenge" style="display:none;">
+      <p class="challengeTitle">AI Challenge:</p>
+      <div id="lock-ai" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Answer the questions to unlock the secret password:</p>
+      <div id="chatbot-container">
+        <div id="chat-log" class="chat-log"><p><em>Chatbot is ready. Let's start!</em></p></div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type your answer..." required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+      <div id="password-container" style="display:none; margin-top:10px;">
+        <input type="text" id="password-input" placeholder="Enter password" />
+        <button id="password-submit">Unlock</button>
+      </div>
+    </div>
+
+    <!-- FLOWER CHALLENGE -->
+    <!-- ---------------- FLOWER CHALLENGE ---------------- -->
+<div class="challenge" id="flower-challenge" style="display:none;">
+  <p class="challengeTitle">Flower Challenge:</p>
+
+  <!-- Замок -->
+  <div id="lock-flower" class="lock-container close">
+    <div class="lock-top"></div>
+    <div class="lock-body"><div class="keyhole"></div></div>
   </div>
 
-  <!-- MUSIC CHALLENGE -->
-  <div class="challenge" id="music-challenge" style="display:none;">
-    <p class="challengeTitle">Music Challenge:</p>
-    <div id="lock-music" class="lock-container close">
-      <div class="lock-top"></div>
-      <div class="lock-body"><div class="keyhole"></div></div>
-    </div>
-    <p class="challangeText">Task 2: Listen to the melody and enter the password:</p>
-    <input type="text" id="music-input" placeholder="e.g., 12345" />
-    <button id="music-submit">Unlock</button>
+  <p class="challangeText">Find the secret flower 🌸</p>
+
+  <div class="flower-container">
+    <div class="flower" data-correct="false">🌸</div>
+    <div class="flower" data-correct="false">🌸</div>
+    <div class="flower" data-correct="true">🌸</div>
+    <div class="flower" data-correct="false">🌸</div>
+    <div class="flower" data-correct="false">🌸</div>
+    <div class="flower" data-correct="false">🌸</div>
   </div>
 
-  <!-- AI CHALLENGE -->
-  <div class="challenge" id="ai-challenge" style="display:none;">
-    <p class="challengeTitle">AI Challenge:</p>
-    <div id="lock-ai" class="lock-container close">
-      <div class="lock-top"></div>
-      <div class="lock-body"><div class="keyhole"></div></div>
-    </div>
-    <p class="challangeText">Answer the questions to unlock the secret password:</p>
-
-    <div id="chatbot-container">
-      <div id="chat-log" class="chat-log"><p><em>Chatbot is ready. Let's start!</em></p></div>
-      <form id="chat-form">
-        <input type="text" id="chat-input" placeholder="Type your answer..." required />
-        <button type="submit">Send</button>
-      </form>
-    </div>
-
-    <div id="password-container" style="display:none; margin-top:10px;">
-      <input type="text" id="password-input" placeholder="Enter password" />
-      <button id="password-submit">Unlock</button>
-    </div>
+  <div id="flower-password" style="margin-top:15px; font-weight:bold; display:none;">
+    Your secret password is: <span>LOVEYOU</span>
   </div>
 
-  <!-- TASK 4 -->
-  <div class="challenge" id="flower-challenge" style="display:none;">
-    <p class="challengeTitle">Flower Challenge:</p>
-    <p class="challangeText">Find the secret flower 🌸</p>
-    <div class="flower-container">
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="true">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-      <div class="flower" data-correct="false">🌸</div>
-    </div>
-    <div id="flower-password" style="margin-top:15px; font-weight:bold; display:none;">
-      Your secret password is: <span>LOVEYOU</span>
-    </div>
-    <div id="flower-message" class="message"></div>
+  <!-- Поле для введення пароля -->
+  <div id="flower-password-container" style="display:none; margin-top:10px;">
+    <input type="text" id="flower-password-input" placeholder="Enter password"/>
+    <button id="flower-password-submit">Unlock</button>
   </div>
 
+  <div id="flower-message" class="message"></div>
 </div>
-</div>
-<script src="script.js"></script>
+   <!-- ALPHABET CHALLENGE -->
+   <div class="challenge" id="alphabet-challenge" style="display:none;">
+    <p class="challengeTitle">Alphabet Challenge:</p>
+  
+    <!-- Замок -->
+    <div id="lock-alphabet" class="lock-container close">
+      <div class="lock-top"></div>
+      <div class="lock-body"><div class="keyhole"></div></div>
+    </div>
+  
+    <p class="challangeText">Decode the secret message 💌 by clicking the symbols:</p>
+  
+    <div id="alphabet-container"></div>
+  
+    <div id="input-container">
+      <p id="user-input"></p>
+    </div>
+  
+    <div id="next-task" style="display:none;">
+      <button id="next-btn">Unlock</button>
+    </div>
+  </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

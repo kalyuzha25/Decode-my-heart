@@ -77,7 +77,7 @@ input[type="text"]:focus {
   
   /* --- HEARTS --- */
   .heart {
-    position: absolute;
+    position: fixed;
     width: 20px;
     height: 20px;
     background: #FF1493;
@@ -89,7 +89,7 @@ input[type="text"]:focus {
   .heart::before,
   .heart::after {
     content: '';
-    position: absolute;
+    position: fixed;
     width: 20px;
     height: 20px;
     background: #FF1493;
@@ -513,4 +513,69 @@ input[type="text"]:focus {
   50% { transform: translateX(5px); }
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
+}
+
+
+#alphabet-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 12px auto;
+}
+
+.symbol-btn {
+  font-size: 22px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 2px solid #ffb6c1;
+  background: #fff0f5;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.symbol-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Hover для правильної букви */
+.symbol-btn.highlight:hover {
+  background: #87CEFA; /* світло-блакитний */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(135,206,250,0.5);
+}
+
+/* Hover для інших кнопок */
+.symbol-btn:not(.highlight):hover {
+  background: #ff69b4; /* рожевий */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(255,105,180,0.4);
+}
+
+/* Неправильні кнопки тремтять */
+.symbol-btn.incorrect {
+  animation: wobble 0.5s;
+}
+
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+#user-input {
+  font-size: 20px;
+  color: #c2185b;
+  letter-spacing: 2px;
+  min-height: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#next-task {
+  display: none;
+  margin-top: 15px;
 }
