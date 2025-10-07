@@ -30,7 +30,7 @@
         <div class="lock-body"><div class="keyhole"></div></div>
       </div>
       <p class="challangeText">Task 1: Enter the coordinates of our first meeting:</p>
-      <input type="text" id="memory-input" placeholder="e.g., 50.86, 4.358" />
+      <input type="text" id="memory-input" placeholder="12.349948, 1.234321" />
       <button id="memory-submit">Unlock</button>
     </div>
 
@@ -53,7 +53,7 @@
         <div class="lock-top"></div>
         <div class="lock-body"><div class="keyhole"></div></div>
       </div>
-      <p class="challangeText">Answer the questions to unlock the secret password:</p>
+      <p class="challangeText">Task 3: Answer the questions to unlock the secret password:</p>
       <div id="chatbot-container">
         <div id="chat-log" class="chat-log"><p><em>Chatbot is ready. Let's start!</em></p></div>
         <form id="chat-form">
@@ -74,17 +74,26 @@
         <div class="lock-top"></div>
         <div class="lock-body"><div class="keyhole"></div></div>
       </div>
-      <p class="challangeText">Find the secret flower 🌸</p>
+      <p class="challangeText">Task 4: Find the secret flower 🌸</p>
       <div class="flower-container">
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
         <div class="flower" data-correct="false">🌸</div>
         <div class="flower" data-correct="false">🌸</div>
         <div class="flower" data-correct="true">🌸</div>
         <div class="flower" data-correct="false">🌸</div>
         <div class="flower" data-correct="false">🌸</div>
         <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
       </div>
       <div id="flower-password" style="margin-top:15px; font-weight:bold; display:block;">
-        Your secret password is: <span>LOVEYOU</span>
+        Your secret password is: <span>GiveMeHroshi</span>
       </div>
       <div id="flower-password-container" style="display:block; margin-top:10px;">
         <input type="text" id="flower-password-input" placeholder="Enter password"/>
@@ -100,7 +109,7 @@
         <div class="lock-top"></div>
         <div class="lock-body"><div class="keyhole"></div></div>
       </div>
-      <p class="challangeText">Decode the secret message 💌 by clicking the symbols:</p>
+      <p class="challangeText">Task 5: Decode the secret message 💌 </p>
       <div id="alphabet-container"></div>
       <input type="text" id="word-input" placeholder="Enter the secret word"/>
   <button id="word-submit">Unlock</button>
@@ -111,7 +120,7 @@
     </div>
 
     <div class="challenge" id="date-challenge-6">
-      <p class="challengeTitle">💌 Decode letters from dates!</p>
+      <p class="challengeTitle"> 💌 Decode letters </p>
       
       <!-- Замок -->
       <div id="lock-6" class="lock-container close">
@@ -119,14 +128,14 @@
         <div class="lock-body"><div class="keyhole"></div></div>
       </div>
     
-      <p class="challengeText">Enter the correct letter for each date:</p>
+      <p class="challengeText">Task 6: Guess why you have these numbers</p>
     
       <!-- Алфавіт -->
       <div id="alphabet-container-6"></div>
     
       <!-- Ввід і кнопка -->
       <input type="text" id="letter-input-6" placeholder="Enter letter"/>
-      <button id="submit-letter-6">Submit</button>
+      <button id="submit-letter-6">Unlock</button>
     </div>
   </div>
   <div id="mini-calculator" style="display:none;">
@@ -151,6 +160,22 @@
       <button class="clear-btn">C</button>
       <button class="equals-btn">=</button>
       <button class="op-btn">+</button>
+    </div>
+  </div>
+
+
+
+
+
+  <div id="final-container" style="text-align:center; margin-top:50px;">
+    <!-- Конверт -->
+    <div id="envelope" class="envelope">
+      <div class="flap"></div>
+      <div class="body">
+        <!-- Квитки всередині конверта -->
+        <img src="/photos/two-tickets-svgrepo-com.svg" alt="Ticket 1" class="ticket inside">
+        <img src="/photos/two-tickets-svgrepo-com.svg" alt="Ticket 2" class="ticket inside">
+      </div>
     </div>
   </div>
   </div>
