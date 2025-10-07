@@ -516,7 +516,11 @@ input[type="text"]:focus {
 }
 
 
-#alphabet-container {
+/* --- ALPHABET CHALLENGE --- */
+#date-challenge-6, #mini-calculator {
+  display: none;
+}
+#alphabet-container, #alphabet-container-6 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -524,7 +528,7 @@ input[type="text"]:focus {
   margin: 12px auto;
 }
 
-.symbol-btn {
+.symbol-btn, .letter-btn {
   font-size: 22px;
   padding: 8px 12px;
   border-radius: 12px;
@@ -535,26 +539,41 @@ input[type="text"]:focus {
   position: relative;
 }
 
-.symbol-btn:hover {
+/* Hover для всіх кнопок */
+.symbol-btn:hover, .letter-btn:hover {
   transform: scale(1.05);
 }
 
-/* Hover для правильної букви */
+/* Hover для правильної букви у завданні 5 */
 .symbol-btn.highlight:hover {
   background: #87CEFA; /* світло-блакитний */
   color: #fff;
   box-shadow: 0 0 8px rgba(135,206,250,0.5);
 }
 
-/* Hover для інших кнопок */
+/* Hover для інших кнопок у завданні 5 */
 .symbol-btn:not(.highlight):hover {
   background: #ff69b4; /* рожевий */
   color: #fff;
   box-shadow: 0 0 8px rgba(255,105,180,0.4);
 }
 
+/* Завдання 6: вже зібрані букви підсвічуються завжди */
+.letter-btn.collected {
+  background: #87CEFA; /* світло-блакитний */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(135,206,250,0.5);
+}
+
+/* Hover для інших кнопок завдання 6 */
+.letter-btn:not(.collected):hover {
+  background: #ff69b4;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(255,105,180,0.4);
+}
+
 /* Неправильні кнопки тремтять */
-.symbol-btn.incorrect {
+.symbol-btn.incorrect, .letter-btn.incorrect {
   animation: wobble 0.5s;
 }
 
@@ -579,3 +598,150 @@ input[type="text"]:focus {
   display: none;
   margin-top: 15px;
 }
+
+
+/* --- ALPHABET CHALLENGE --- */
+#date-challenge-6, #mini-calculator {
+  display: none;
+}
+
+#alphabet-container, #alphabet-container-6 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 12px auto;
+}
+
+.symbol-btn, .letter-btn {
+  font-size: 22px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 2px solid #ffb6c1;
+  background: #fff0f5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* --- Hover для всіх кнопок --- */
+.symbol-btn:hover, .letter-btn:hover {
+  transform: scale(1.05);
+}
+
+/* --- Завдання 5: правильна буква підсвічується світло-блакитним --- */
+.symbol-btn.highlight:hover {
+  background: #87CEFA; /* світло-блакитний */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(135,206,250,0.5);
+}
+
+/* Hover для інших кнопок у завданні 5 */
+.symbol-btn:not(.highlight):hover {
+  background: #ff69b4; /* рожевий */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(255,105,180,0.4);
+}
+
+/* --- Завдання 6: вже зібрані букви підсвічуються завжди --- */
+.letter-btn.collected {
+  background: #87CEFA; /* світло-блакитний */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(135,206,250,0.5);
+  pointer-events: none; /* не можна клікати повторно */
+}
+
+/* Hover для букв, які ще не зібрані у завданні 6 */
+.letter-btn:not(.collected):hover {
+  background: #ff69b4; /* світлий рожевий */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(255,105,180,0.4);
+}
+
+/* --- Неправильні кнопки тремтять --- */
+.symbol-btn.incorrect, .letter-btn.incorrect {
+  animation: wobble 0.5s !important;
+}
+
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* --- Вхідний інпут для паролю --- */
+#user-input {
+  font-size: 20px;
+  color: #c2185b;
+  letter-spacing: 2px;
+  min-height: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* --- Наступна кнопка --- */
+#next-task {
+  display: none;
+  margin-top: 15px;
+}
+
+#mini-calculator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 220px;
+  background: linear-gradient(135deg, #ff69b4, #87CEFA);
+  border: 2px solid #ffb6c1;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#mini-calc-input {
+  width: 100%;
+  height: 40px;
+  text-align: right;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+  background-color: rgba(255,255,255,0.9);
+  color: #333;
+  box-sizing: border-box;
+}
+
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.calc-buttons button {
+  padding: 12px 0;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+  transition: 0.2s;
+}
+
+.num-btn { background-color: #ff69b4; }
+.num-btn:hover { background-color: #ff1493; }
+
+.op-btn { background-color: #87CEFA; }
+.op-btn:hover { background-color: #00BFFF; }
+
+.equals-btn { background-color: #ff69b4; }
+.equals-btn:hover { background-color: #ff1493; }
+
+.clear-btn { background-color: #87CEFA; }
+.clear-btn:hover { background-color: #00BFFF; }

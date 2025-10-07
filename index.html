@@ -21,6 +21,7 @@
   <div class="heart" style="left:95%; animation-delay:1.8s;"></div>
 
   <div class="container">
+
     <!-- MEMORY CHALLENGE -->
     <div class="challenge" id="memory-challenge">
       <p class="challengeTitle">Memory Challenge:</p>
@@ -67,63 +68,92 @@
     </div>
 
     <!-- FLOWER CHALLENGE -->
-    <!-- ---------------- FLOWER CHALLENGE ---------------- -->
-<div class="challenge" id="flower-challenge" style="display:none;">
-  <p class="challengeTitle">Flower Challenge:</p>
-
-  <!-- Замок -->
-  <div id="lock-flower" class="lock-container close">
-    <div class="lock-top"></div>
-    <div class="lock-body"><div class="keyhole"></div></div>
-  </div>
-
-  <p class="challangeText">Find the secret flower 🌸</p>
-
-  <div class="flower-container">
-    <div class="flower" data-correct="false">🌸</div>
-    <div class="flower" data-correct="false">🌸</div>
-    <div class="flower" data-correct="true">🌸</div>
-    <div class="flower" data-correct="false">🌸</div>
-    <div class="flower" data-correct="false">🌸</div>
-    <div class="flower" data-correct="false">🌸</div>
-  </div>
-
-  <div id="flower-password" style="margin-top:15px; font-weight:bold; display:none;">
-    Your secret password is: <span>LOVEYOU</span>
-  </div>
-
-  <!-- Поле для введення пароля -->
-  <div id="flower-password-container" style="display:none; margin-top:10px;">
-    <input type="text" id="flower-password-input" placeholder="Enter password"/>
-    <button id="flower-password-submit">Unlock</button>
-  </div>
-
-  <div id="flower-message" class="message"></div>
-</div>
-   <!-- ALPHABET CHALLENGE -->
-   <div class="challenge" id="alphabet-challenge" style="display:none;">
-    <p class="challengeTitle">Alphabet Challenge:</p>
-  
-    <!-- Замок -->
-    <div id="lock-alphabet" class="lock-container close">
-      <div class="lock-top"></div>
-      <div class="lock-body"><div class="keyhole"></div></div>
+    <div class="challenge" id="flower-challenge" style="display:none;">
+      <p class="challengeTitle">Flower Challenge:</p>
+      <div id="lock-flower" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Find the secret flower 🌸</p>
+      <div class="flower-container">
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="true">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+        <div class="flower" data-correct="false">🌸</div>
+      </div>
+      <div id="flower-password" style="margin-top:15px; font-weight:bold; display:block;">
+        Your secret password is: <span>LOVEYOU</span>
+      </div>
+      <div id="flower-password-container" style="display:block; margin-top:10px;">
+        <input type="text" id="flower-password-input" placeholder="Enter password"/>
+        <button id="flower-password-submit">Unlock</button>
+      </div>
+      <div id="flower-message" class="message"></div>
     </div>
-  
-    <p class="challangeText">Decode the secret message 💌 by clicking the symbols:</p>
-  
-    <div id="alphabet-container"></div>
-  
-    <div id="input-container">
-      <p id="user-input"></p>
-    </div>
-  
-    <div id="next-task" style="display:none;">
-      <button id="next-btn">Unlock</button>
-    </div>
-  </div>
-  </div>
 
+    <!-- ALPHABET CHALLENGE -->
+    <div class="challenge" id="alphabet-challenge" style="display:none;">
+      <p class="challengeTitle">Alphabet Challenge:</p>
+      <div id="lock-alphabet" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+      <p class="challangeText">Decode the secret message 💌 by clicking the symbols:</p>
+      <div id="alphabet-container"></div>
+      <input type="text" id="word-input" placeholder="Enter the secret word"/>
+  <button id="word-submit">Unlock</button>
+      <div id="user-input"></div>
+      <div id="next-task" style="display:none;">
+  
+      </div>
+    </div>
+
+    <div class="challenge" id="date-challenge-6">
+      <p class="challengeTitle">💌 Decode letters from dates!</p>
+      
+      <!-- Замок -->
+      <div id="lock-6" class="lock-container close">
+        <div class="lock-top"></div>
+        <div class="lock-body"><div class="keyhole"></div></div>
+      </div>
+    
+      <p class="challengeText">Enter the correct letter for each date:</p>
+    
+      <!-- Алфавіт -->
+      <div id="alphabet-container-6"></div>
+    
+      <!-- Ввід і кнопка -->
+      <input type="text" id="letter-input-6" placeholder="Enter letter"/>
+      <button id="submit-letter-6">Submit</button>
+    </div>
+  </div>
+  <div id="mini-calculator" style="display:none;">
+    <input type="text" id="mini-calc-input" value="0" readonly />
+    <div class="calc-buttons">
+      <button class="num-btn">7</button>
+      <button class="num-btn">8</button>
+      <button class="num-btn">9</button>
+      <button class="op-btn">/</button>
+  
+      <button class="num-btn">4</button>
+      <button class="num-btn">5</button>
+      <button class="num-btn">6</button>
+      <button class="op-btn">*</button>
+  
+      <button class="num-btn">1</button>
+      <button class="num-btn">2</button>
+      <button class="num-btn">3</button>
+      <button class="op-btn">-</button>
+  
+      <button class="num-btn">0</button>
+      <button class="clear-btn">C</button>
+      <button class="equals-btn">=</button>
+      <button class="op-btn">+</button>
+    </div>
+  </div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
