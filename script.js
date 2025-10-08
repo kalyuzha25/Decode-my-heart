@@ -93,15 +93,15 @@ const questions = [
   "Question 2: Who did say 'I love you' first?",
   "Question 3: What's your full name (4's version)",
   "Question 4: What's her favorite word?",
-  "Question 5: How can you make her smile"
+  "Question 5: How can you make her smile?"
 ];
 
 const answers = [
   ["20:24","20.24"],
- ["me","bryan"],
+  ["me","bryan"],
  ["bryan sanchez paul pazmino"],
  ["hroshi"],
-["look at me"]
+  ["look at me"]
 ];
 const secretPassword = "LoveYouBilshe4";
 
@@ -221,8 +221,8 @@ document.getElementById('flower-password-submit').addEventListener('click', () =
 const alphabetContainer = document.getElementById("alphabet-container");
 const wordInput = document.getElementById("word-input");
 // const secretWord = "MY BEAUTIFUL POHANY-I WILL ALWAYS LOVE YOU!";
-// const secretWord = "MY BEAUTIFUL POHANY";
-const secretWord = "MY";
+ const secretWord = "MY BEAUTIFUL POHANY";
+//const secretWord = "MY";
 let currentIndex = 0;
 
 const emojiAlphabet = {
@@ -294,7 +294,7 @@ const alphabetContainer6 = document.getElementById("alphabet-container-6");
 const input6 = document.getElementById("letter-input-6");
 const submitBtn6 = document.getElementById("submit-letter-6");
 const lock6 = document.getElementById("lock-6");
-const dates6 = ["14/02/2025","21/03/2025","09/04/2025","06/04/2025"];
+const dates6 = ["14/02/2025","21/03/2025","06/04/2025","09/04/2025","01/05/2025","09/10/2025"];
 let currentLevel = 0;
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
@@ -312,33 +312,73 @@ function dateToLetter(date){
   return String.fromCharCode(64 + sum);
 }
 
-submitBtn6.addEventListener('click', ()=>{
+submitBtn6.addEventListener('click', () => {
   const userLetter = input6.value.trim().toUpperCase();
-  if(!userLetter) return;
+  if (!userLetter) return;
+
   const correctLetter = dateToLetter(dates6[currentLevel]);
-  if(userLetter === correctLetter){
+
+  if (userLetter === correctLetter) {
     const btn = document.getElementById(`alphabet6-${correctLetter}`);
-    if(btn) btn.classList.add('collected');
+    if (btn) btn.classList.add('collected');
+
     currentLevel++;
     input6.value = '';
-    if(currentLevel === dates6.length){
-      lock6.classList.replace('close','open');
+
+    if (currentLevel === dates6.length) {
+      lock6.classList.replace('close', 'open');
       document.getElementById('mini-calculator').style.display = 'none';
+
+      // Показати конверт плавно
       const envelope = document.getElementById('envelope');
-      envelope.style.display = 'none';
-  envelope.style.display = 'block';
-  envelope.addEventListener('click', openEnvelope);
+      envelope.classList.add('visible');
+
+      // Додаємо клік для відкриття flap
+      envelope.addEventListener('click', openEnvelope);
     }
-  } else input6.value = '';
+  } else {
+    input6.value = '';
+  }
 });
 
-  
-  const calcInput = document.getElementById('mini-calc-input');
-let currentValue = "";
+/// 🌸 4 кнопки-підказки всередині блоку challenge 6
+const challenge6 = document.getElementById("date-challenge-6");
 
-function updateDisplay() {
-  calcInput.value = currentValue || "0";
-}
+const hints6 = [
+  { label: "💞 Hint 1", text: "When did you text me for the first time?" },
+  { label: "🎁 Hint 2", text: "When was our first meeting?" },
+  { label: "💌 Hint 3", text: "When did you tell that you love me?" },
+  { label: "🌸 Hint 4", text: "When did you ask to be your gf ?✨" },
+  { label: "🌈 Hint 5", text: "My first visit to Germany?" },
+  { label: "🩷 Hint 6", text: "Whta's today's date?" }
+];
+
+// створюємо компактний блок для підказок
+const hintsBox6 = document.createElement("div");
+hintsBox6.className = "hints-box-6";
+
+const hintText6 = document.createElement("div");
+hintText6.className = "hint-text-6";
+hintsBox6.appendChild(hintText6);
+
+const hintBtns6 = document.createElement("div");
+hintBtns6.className = "hint-btns-6";
+hintsBox6.appendChild(hintBtns6);
+
+hints6.forEach((hint, index) => {
+  const btn = document.createElement("button");
+  btn.className = "hint6-btn";
+  btn.textContent = hint.label;
+  btn.addEventListener("click", () => {
+    hintText6.textContent = hint.text;
+    hintText6.classList.add("show");
+    btn.disabled = true;
+    btn.classList.add("used");
+  });
+  hintBtns6.appendChild(btn);
+});
+
+challenge6.appendChild(hintsBox6);
 
 // Натискання цифр
 document.querySelectorAll('.num-btn').forEach(btn => {
@@ -407,23 +447,8 @@ resetBtn.addEventListener('click', () => {
 
 
 
-const envelopeFlap = document.querySelector("#envelope .flap");
-
-// Функція для відкриття кришки конверта
-function openEnvelope() {
-  envelopeFlap.style.transform = "translateY(0) rotateX(180deg)";
-  envelopeFlap.style.transition = "transform 1s ease";
-}
-
-// Викликати після завершення останнього завдання
-
-// Фінальний конверт
 const envelope = document.getElementById('envelope');
-const balls = document.querySelectorAll('.ball');
 
-function openEnvelope() {
-  const flap = envelope.querySelector('.flap');
-  flap.style.transform = 'translateY(220px) rotateX(-150deg)'; 
-}
-
-envelope.addEventListener('click', openEnvelope);
+envelope.addEventListener('click', () => {
+  envelope.classList.toggle('open');
+});

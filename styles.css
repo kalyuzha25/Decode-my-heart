@@ -748,15 +748,16 @@ input[type="text"]:focus {
 
 
 #envelope {
-  display: none;
-  width: 600px;       /* залишаємо ширину */
-  height: 563px;      /* 375 * 1.5 */
+  display: block;
+  width: 600px;
+  height: 563px;
   margin: 60px auto;
   position: relative;
-  perspective: 1200px;
+  perspective: 1000px;
   cursor: pointer;
 }
 
+/* --- Кришка конверта --- */
 .flap {
   width: 100%;
   height: 270px;
@@ -765,45 +766,81 @@ input[type="text"]:focus {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(215px); /* стартова позиція */
-  transform-origin: top center; /* точка повороту — верх кришки */
-  box-shadow: 0 11.25px 33.75px rgba(0,0,0,0.2);
-  transition: transform 0.7s ease;
-  z-index: 2;
-  cursor: pointer;
+  transform: translateY(215px) rotateX(0deg);
+  transform-origin: top center;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 3;
 }
+
+/* --- Тіло конверта --- */
 .body {
   width: 100%;
-  height: 337.5px;               /* 225 * 1.5 */
+  height: 340px;
   background: linear-gradient(135deg, #ffe0e0, #ffd1d1);
   position: absolute;
   bottom: 0;
   left: 0;
-  border: 4.5px solid #ff8c94;   /* 3 * 1.5 */
-  border-bottom-left-radius: 45px; /* 30 * 1.5 */
-  border-bottom-right-radius: 45px; /* 30 * 1.5 */
-  box-shadow: 0 18px 67.5px rgba(0,0,0,0.25); /* 12*1.5, 45*1.5 */
-  overflow: visible;
+  border: 5px solid #ff8c94;
+  border-bottom-left-radius: 45px;
+  border-bottom-right-radius: 45px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+  overflow: hidden; /* приховує квиток усередині */
+  z-index: 1;
 }
 
+/* --- Квиток --- */
 .ticket {
-  width: 337.5px;   /* 225 * 1.5 */
-  height: 202.5px;  /* 135 * 1.5 */
+  width: 340px;
+  height: 210px;
   position: absolute;
-  bottom: 22.5px;   /* 15 * 1.5 */
   left: 50%;
-  transform: translateX(-50%) translateY(0);
-  transition: transform 1s ease, opacity 1s ease;
+  bottom: -180px; /* ховаємо глибоко всередині */
+  transform: translateX(-50%) rotate(-1deg);
   opacity: 0;
-  border-radius: 27px; /* 18 * 1.5 */
-  box-shadow: 0 13.5px 33.75px rgba(0,0,0,0.25); /* 9*1.5, 22.5*1.5 */
-  background: #ffd1d1;
+  border-radius: 25px;
+  background: transparent;
+
+  transition: bottom 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+  z-index: 2;
 }
 
+/* --- Анімація при відкритті --- */
+.envelope.open .flap {
+  transform: translateY(220px) rotateX(-150deg);
+}
 
+/* Квиток виїжджає з глибини */
+.envelope.open .ticket {
+  bottom: 120px;
+  opacity: 1;
+  transition-delay: 0.4s; /* трохи після flap */
+  animation: bounceUp 1.2s ease forwards 0.4s;
+}
 
+/* --- “Живий” ефект руху квитка --- */
+@keyframes bounceUp {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(0.98) rotate(-1deg);
+  }
+  70% {
+    transform: translateX(-50%) translateY(-10px) scale(1.02) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
+  }
+}
+.envelope {
+  display: block; /* конверт завжди в DOM */
+  opacity: 0;     /* початково невидимий */
+  pointer-events: none; /* щоб не можна було клікати поки невидимий */
+  transition: opacity 0.8s ease;
+}
 
-
+.envelope.visible {
+  opacity: 1;
+  pointer-events: auto; /* після появи можна клікати */
+}
 .audio-container {
   margin: 0 0 15px 0; /* трохи прибираємо відступ зверху */
   padding: 10px;
@@ -821,3 +858,60 @@ audio {
   margin-top: -8px; /* піднімаємо трек */
 }
 
+
+
+
+
+.hints-box-6 {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 230, 244, 0.5);
+  border: 1px solid #f3a7cf;
+  text-align: center;
+  max-width: 300px;
+  margin-inline: auto;
+  transition: all 0.3s ease;
+}
+
+.hint-btns-6 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.hint6-btn {
+  background: #ffe3f0;
+  border: 1px solid #f1a6ca;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #c04787;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hint6-btn:hover:not(:disabled) {
+  background: #ffd1e8;
+  transform: scale(1.05);
+}
+
+.hint6-btn.used {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.hint-text-6 {
+  font-size: 13px;
+  color: #b14d82;
+  margin-top: 8px;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.4s ease;
+}
+
+.hint-text-6.show {
+  opacity: 1;
+  transform: translateY(0);
+}
