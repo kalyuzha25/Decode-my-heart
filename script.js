@@ -70,7 +70,7 @@ if(musicState.unlocked){
 
 musicSubmit.addEventListener('click', () => {
   const val = musicInput.value.trim();
-  if(val === "12345"){
+  if(val === "6114"){
     lockMusic.classList.replace('close','open');
     aiChallenge.style.display = 'block';
     saveProgress("musicChallenge",{ unlocked:true, value:val });
@@ -89,9 +89,20 @@ const passwordSubmit = document.getElementById('password-submit');
 const lockAI = document.getElementById('lock-ai');
 
 const questions = [
-  "Question 1: What is the exact time when you sent her a first message?"
+  "Question 1: What is the exact time when you sent her a first message?",
+  "Question 2: Who did say 'I love you' first?",
+  "Question 3: What's your full name (4's version)",
+  "Question 4: What's her favorite word?",
+  "Question 5: How can you make her smile"
 ];
-const answers = [["20:24","20.24"]];
+
+const answers = [
+  ["20:24","20.24"],
+ ["me","bryan"],
+ ["bryan sanchez paul pazmino"],
+ ["hroshi"],
+["look at me"]
+];
 const secretPassword = "LoveYouBilshe4";
 
 let aiState = loadProgress("aiChallenge") || { currentQuestion:0, unlocked:false };
@@ -177,6 +188,7 @@ flowers.forEach(flower => {
   flower.addEventListener('click', () => {
     if(flower.dataset.correct === "true"){
       flower.classList.add('correct');
+      flowerMessageDiv.textContent = "";
 
       // Показуємо пароль і поле для вводу після натискання правильної квітки
       flowerPasswordDiv.textContent = `🎉 The password is: ${flowerSecretPassword}`;
@@ -208,39 +220,60 @@ document.getElementById('flower-password-submit').addEventListener('click', () =
 // ------------------- ALPHABET CHALLENGE -------------------
 const alphabetContainer = document.getElementById("alphabet-container");
 const wordInput = document.getElementById("word-input");
-const secretWord = "LOVE";
+// const secretWord = "MY BEAUTIFUL POHANY-I WILL ALWAYS LOVE YOU!";
+// const secretWord = "MY BEAUTIFUL POHANY";
+const secretWord = "MY";
 let currentIndex = 0;
 
 const emojiAlphabet = {
-  A:"💖", B:"🌸", C:"🌙", D:"🎀", E:"💌", F:"✨",
-  G:"🕊️", H:"🌈", I:"🔥", J:"🎶", K:"💎", L:"🌹",
-  M:"🌊", N:"🍓", O:"🌞", P:"🌟", Q:"🪐", R:"🩷",
-  S:"🌺", T:"🌻", U:"🌼", V:"🌟", W:"🌹", X:"🌸", Y:"🌻", Z:"🌺"
+  A: "💖",  B: "🌸",  C: "🌙",  D: "🎀",  E: "💌",
+  F: "✨",  G: "🕊️",  H: "🌈",  I: "🔥",  J: "🎶",
+  K: "💎",  L: "🌹",  M: "🌊",  N: "🍓",  O: "🌞",
+  P: "🌟",  Q: "🪐",  R: "🩷",  S: "🌺",  T: "🌻",
+  U: "🌼",  V: "💫",  W: "🌷",  X: "🌿",  Y: "🍀",  Z: "🍁",
+  "-": "🍬", "!": "🪄", " ": "😛"
 };
 
-Object.entries(emojiAlphabet).forEach(([letter, symbol])=>{
+// Створюємо кнопки для всіх символів алфавіту
+alphabetContainer.innerHTML = "";
+Object.entries(emojiAlphabet).forEach(([letter, symbol]) => {
   const btn = document.createElement("button");
   btn.className = "symbol-btn";
   btn.textContent = symbol;
-  btn.dataset.letter = letter;
-  if(letter===secretWord[currentIndex]) btn.classList.add("highlight");
+  btn.dataset.letter = letter.toUpperCase(); // всі букви у верхньому регістрі
   alphabetContainer.appendChild(btn);
 });
 
-alphabetContainer.addEventListener("click", e=>{
+// Підсвічування наступної букви
+function highlightNext() {
+  if(currentIndex >= secretWord.length) return;
+
+  const nextLetter = secretWord[currentIndex].toUpperCase();
+
+  // прибираємо стару підсвітку
+  document.querySelectorAll('.symbol-btn.highlight').forEach(btn => btn.classList.remove('highlight'));
+
+  // підсвічуємо всі кнопки з потрібним символом
+  Array.from(alphabetContainer.children)
+    .filter(btn => btn.dataset.letter === nextLetter)
+    .forEach(btn => btn.classList.add('highlight'));
+}
+
+// Підсвічуємо першу букву
+highlightNext();
+
+alphabetContainer.addEventListener("click", e => {
   if(!e.target.classList.contains("symbol-btn")) return;
+
   const letter = e.target.dataset.letter;
-  if(letter === secretWord[currentIndex]){
-    wordInput.value += letter;
-    e.target.classList.add("collected");
-    e.target.classList.remove("highlight");
+  const currentLetter = secretWord[currentIndex].toUpperCase();
+
+  if(letter === currentLetter){
+    wordInput.value += secretWord[currentIndex]; // беремо оригінальний символ
     currentIndex++;
-    if(currentIndex < secretWord.length){
-      const nextLetterBtn = Array.from(alphabetContainer.children)
-        .find(btn=>btn.dataset.letter===secretWord[currentIndex] && !btn.classList.contains("collected"));
-      if(nextLetterBtn) nextLetterBtn.classList.add("highlight");
-    }
-    if(wordInput.value.length === secretWord.length){
+    highlightNext();
+
+    if(currentIndex === secretWord.length){
       document.getElementById("next-task").style.display = "block";
       document.getElementById("lock-alphabet").classList.replace("close","open");
       document.getElementById("date-challenge-6").style.display = "block";

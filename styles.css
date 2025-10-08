@@ -799,3 +799,25 @@ input[type="text"]:focus {
   box-shadow: 0 13.5px 33.75px rgba(0,0,0,0.25); /* 9*1.5, 22.5*1.5 */
   background: #ffd1d1;
 }
+
+
+
+
+
+.audio-container {
+  margin: 0 0 15px 0; /* трохи прибираємо відступ зверху */
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Піднімаємо трек трохи вгору */
+audio {
+  width: 100%;
+  max-width: 320px;
+  outline: none;
+  border-radius: 8px;
+  margin-top: -8px; /* піднімаємо трек */
+}
+
